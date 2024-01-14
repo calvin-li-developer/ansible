@@ -1,5 +1,5 @@
 # command to use:
-# ansible-playbook playbooks/create_proxmox_vm.yml --extra-vars "$(cat .env | xargs)"
+# ansible-playbook playbooks/create-proxmox-vm.yml --extra-vars "$(cat .env | xargs)"
 
 - name: Proxmox Create Virtual Machine
   hosts: proxmox
