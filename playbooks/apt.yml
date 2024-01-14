@@ -1,0 +1,12 @@
+# command to use:
+# ansible-playbook playbooks/apt.yml --extra-vars "$(cat .env | xargs)"
+
+- name: Update Ubuntu Servers
+  hosts: ubuntu
+  become: yes
+
+  tasks:
+      - name: apt
+        apt:
+          update_cache: yes
+          upgrade: 'yes'

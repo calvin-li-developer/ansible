@@ -1,0 +1,29 @@
+# command to use:
+# ansible-playbook playbooks/create_proxmox_vm.yml --extra-vars "$(cat .env | xargs)"
+
+- name: Proxmox Create Virtual Machine
+  hosts: proxmox
+  vars:
+    ansible_python_interpreter: /usr/bin/python3
+  tasks:
+      - name: Naming the Virtual Machine
+        set_fact:
+          vm_name: "ubuntu-{{ lookup('password', 'dev/null chars=ascii_lowercase,digits length=9') }}"
+      - proxmox_kvm:
+          api_user: "{{ api_user }}"
+          api_password: "{{ api_password }}"
+          api_host: "{{ api_host }}"
+          clone: ubuntu-jammy-template
+          name: "{{ vm_name }}"
+          node: "{{ node }}"
+          storage: local-zfs
+          format: qcow2
+          timeout: 500
+      - name: Staring Virtual Machine
+        proxmox_kvm:
+          api_user: "{{ api_user }}"
+          api_password: "{{ api_password }}"
+          api_host: "{{ api_host }}"
+          name: "{{ vm_name }}"
+          node: "{{ node }}"
+          state: started
