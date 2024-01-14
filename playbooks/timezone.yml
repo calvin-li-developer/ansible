@@ -1,5 +1,5 @@
 # command to use:
-# ansible-playbook playbooks/timezone.yml --extra-vars "$(cat .env | xargs)"
+# ansible-playbook playbooks/timezone.yml --extra-vars "$(printenv | xargs)"
 
 - name: Set timezone and configure timesyncd
   hosts: ubuntu

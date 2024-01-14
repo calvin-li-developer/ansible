@@ -1,5 +1,5 @@
 # command to use:
-# ansible-playbook playbooks/apt.yml --extra-vars "$(cat .env | xargs)"
+# ansible-playbook playbooks/apt.yml --extra-vars "$(printenv | xargs)"
 
 - name: Update Ubuntu Servers
   hosts: ubuntu
