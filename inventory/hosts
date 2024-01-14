@@ -6,4 +6,5 @@
 10.0.0.102      ansible_connection=ssh      ansible_user=ubuntu
 10.0.0.103      ansible_connection=ssh      ansible_user=ubuntu
 10.0.0.104      ansible_connection=ssh      ansible_user=ubuntu
+10.0.0.105      ansible_connection=ssh      ansible_user=ubuntu
 10.0.0.106      ansible_connection=ssh      ansible_user=ubuntu

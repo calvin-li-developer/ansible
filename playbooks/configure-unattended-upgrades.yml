@@ -1,0 +1,21 @@
+# command to use:
+# ansible-playbook playbooks/configure-unattended-upgrades.yml --extra-vars "$(printenv | xargs)"
+
+- name: Configure Unattended Upgrades
+  hosts: ubuntu
+  become: yes
+
+  tasks:
+    - name: Install unattended-upgrades and update-notifier-common
+      apt:
+        name:
+          - unattended-upgrades
+          - update-notifier-common
+        state: present
+
+    - name: Copy over the 50unattended-upgrades config
+      template: src=../templates/50unattended-upgrades dest=/etc/apt/apt.conf.d/50unattended-upgrades
+
+    - name: Reconfigure unattended-upgrades
+      command:
+        cmd: dpkg-reconfigure -f noninteractive -plow unattended-upgrades
