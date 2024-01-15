@@ -1,0 +1,5 @@
+- name: Update package cache and dist-upgrade (for Debian/Ubuntu)
+  apt:
+    update_cache: true
+    upgrade: dist
+  when: ansible_pkg_mgr == 'apt'

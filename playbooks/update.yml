@@ -1,0 +1,10 @@
+# command to use:
+# ansible-playbook playbooks/update.yml
+
+- name: Update all servers
+  hosts: all
+  become: true
+  vars:
+    ansible_become_pass: "{{ lookup('env', 'ansible_become_pass') }}"
+  roles:
+    - update
