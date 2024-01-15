@@ -5,13 +5,17 @@
   hosts: ubuntu
   become: yes
   tasks:
-  - name: set timezone
-    shell: timedatectl set-timezone America/Toronto
+
+  - name: Set Timezone
+    timezone:
+      name: America/Toronto
+    register: timezone
 
   - name: Make sure timesyncd is stopped
     systemd:
       name: systemd-timesyncd.service
       state: stopped
+    when: timezone is changed
 
   - name: Copy over the timesyncd config
     template: 
