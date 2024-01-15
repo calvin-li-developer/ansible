@@ -1,0 +1,13 @@
+# command to use:
+# ansible-playbook playbooks/ubuntu.yml
+
+- name: Initialize Ubuntu Servers
+  hosts: ubuntu
+  become: true
+  vars:
+    arch_mapping:
+      x86_64: amd64
+      aarch64: arm64
+    ansible_become_pass: "{{ lookup('env', 'ansible_become_pass') }}"
+  roles:
+    - ubuntu
