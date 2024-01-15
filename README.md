@@ -1,3 +1,3 @@
-# ansible-pvm
+# ansible
 
-Useful Ansible Playbooks for setting up VM and their intial processes
+Useful Ansible Playbooks for setting up servers and provisioning proxmox vm.
