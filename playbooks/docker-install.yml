@@ -1,5 +1,5 @@
 # command to use:
-# ansible-playbook playbooks/docker-install.yml --extra-vars "$(printenv | xargs)"
+# ansible-playbook playbooks/docker-install.yml
 
 - name: Update Ubuntu Servers
   hosts: ubuntu

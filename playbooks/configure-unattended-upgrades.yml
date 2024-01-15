@@ -1,5 +1,5 @@
 # command to use:
-# ansible-playbook playbooks/configure-unattended-upgrades.yml --extra-vars "$(printenv | xargs)"
+# ansible-playbook playbooks/configure-unattended-upgrades.yml
 
 - name: Configure Unattended Upgrades
   hosts: ubuntu

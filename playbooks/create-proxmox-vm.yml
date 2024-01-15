@@ -1,15 +1,21 @@
 # command to use:
-# ansible-playbook playbooks/create-proxmox-vm.yml --extra-vars "$(printenv | xargs)"
+# ansible-playbook playbooks/create-proxmox-vm.yml
 
 - name: Proxmox Create Virtual Machine
   hosts: proxmox
   vars:
     ansible_python_interpreter: /usr/bin/python3
+    api_user: "{{ lookup('env', 'api_user') }}"
+    api_password: "{{ lookup('env', 'api_password') }}"
+    api_host: "{{ lookup('env', 'api_host') }}"
+    node: "{{ lookup('env', 'node') }}"
   tasks:
       - name: Naming the Virtual Machine
         set_fact:
           vm_name: "ubuntu-{{ lookup('password', 'dev/null chars=ascii_lowercase,digits length=9') }}"
-      - proxmox_kvm:
+      
+      - name: Cloning a Ubuntu Jammy Template
+        proxmox_kvm:
           api_user: "{{ api_user }}"
           api_password: "{{ api_password }}"
           api_host: "{{ api_host }}"
@@ -19,6 +25,7 @@
           storage: local-zfs
           format: qcow2
           timeout: 500
+      
       - name: Staring Virtual Machine
         proxmox_kvm:
           api_user: "{{ api_user }}"

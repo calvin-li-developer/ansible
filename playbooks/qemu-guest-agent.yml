@@ -1,5 +1,5 @@
 # command to use:
-# ansible-playbook playbooks/qemu-guest-agent.yml --extra-vars "$(printenv | xargs)"
+# ansible-playbook playbooks/qemu-guest-agent.yml
 
 - name: Install latest qemu-guest-agent
   hosts: ubuntu
