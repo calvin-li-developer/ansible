@@ -20,7 +20,9 @@
         owner: root
         group: root
         mode: 0644
+      register: copy_50unattended_template
 
     - name: Reconfigure unattended-upgrades
       command:
         cmd: dpkg-reconfigure -f noninteractive -plow unattended-upgrades
+      when: copy_50unattended_template is changed
