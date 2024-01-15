@@ -8,7 +8,7 @@
   tasks:
     - name: Install unattended-upgrades and update-notifier-common
       apt:
-        name:
+        pkg:
           - unattended-upgrades
           - update-notifier-common
         state: present
