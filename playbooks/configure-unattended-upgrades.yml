@@ -14,7 +14,12 @@
         state: present
 
     - name: Copy over the 50unattended-upgrades config
-      template: src=../templates/50unattended-upgrades dest=/etc/apt/apt.conf.d/50unattended-upgrades
+      template: 
+        src: ../templates/50unattended-upgrades
+        dest: /etc/apt/apt.conf.d/50unattended-upgrades
+        owner: root
+        group: root
+        mode: 0644
 
     - name: Reconfigure unattended-upgrades
       command:
