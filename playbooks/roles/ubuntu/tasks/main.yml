@@ -29,12 +29,13 @@
     path: /etc/ssh/sshd_config
     regexp: '^#?PasswordAuthentication'
     line: 'PasswordAuthentication yes'
+  register: password_auth
   
 - name: restart ssh
   service:
     name: ssh
     state: restarted
-  changed_when: false
+  when: password_auth is changed
 
 - name: Disable IPv6 via sysctl using shell command
   shell: |
