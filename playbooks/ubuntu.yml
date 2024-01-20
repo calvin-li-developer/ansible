@@ -4,6 +4,7 @@
 - name: Initialize Ubuntu Servers
   hosts: ubuntu
   become: true
+  gather_facts: true
   vars:
     arch_mapping:
       x86_64: amd64
