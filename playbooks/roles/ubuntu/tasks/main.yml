@@ -24,7 +24,7 @@
     state: started
   when: copy_timesyncd_template is changed
 
-- name: Set PasswordAuthentication to yes in sshd_config
+- name: Set PasswordAuthentication to no in sshd_config
   lineinfile:
     path: /etc/ssh/sshd_config
     regexp: '^PasswordAuthentication yes$'
