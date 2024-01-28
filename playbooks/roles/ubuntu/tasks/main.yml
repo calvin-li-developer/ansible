@@ -27,8 +27,8 @@
 - name: Set PasswordAuthentication to yes in sshd_config
   lineinfile:
     path: /etc/ssh/sshd_config
-    regexp: '^#?PasswordAuthentication'
-    line: 'PasswordAuthentication yes'
+    regexp: '^PasswordAuthentication yes$'
+    line: 'PasswordAuthentication no'
   register: password_auth
   
 - name: restart ssh
