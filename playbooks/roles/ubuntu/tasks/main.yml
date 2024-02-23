@@ -148,3 +148,4 @@
     groups: docker
     append: yes
   become: yes
+  when: is_docker_installed is failed
