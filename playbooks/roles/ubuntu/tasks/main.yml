@@ -37,16 +37,21 @@
     state: restarted
   when: password_auth is changed
 
-- name: Disable IPv6 via sysctl using shell command
-  shell: |
-    sysctl -w net.ipv6.conf.all.disable_ipv6=1
-    sysctl -w net.ipv6.conf.default.disable_ipv6=1
-    sysctl -w net.ipv6.conf.lo.disable_ipv6=1
-    sed -i '/^::1/ s/^/#/' /etc/hosts
-    update-grub
-  args:
-    executable: /bin/bash
-  changed_when: false
+- name: Ensure GRUB configuration directory exists
+  file:
+    path: /etc/default
+    state: directory
+
+- name: Disable IPv6 in GRUB configuration
+  lineinfile:
+    path: /etc/default/grub
+    regexp: '^GRUB_CMDLINE_LINUX_DEFAULT'
+    line: 'GRUB_CMDLINE_LINUX_DEFAULT="ipv6.disable=1 quiet splash"'
+  register: ipv6_updated
+
+- name: Update GRUB
+  command: update-grub
+  when: ipv6_updated is changed
 
 - name: Install unattended-upgrades and update-notifier-common
   apt:
@@ -149,3 +154,8 @@
     append: yes
   become: yes
   when: is_docker_installed is failed
+
+- name: Reboot the server to apply changes
+  reboot:
+    msg: "Reboot initiated by Ansible for applying GRUB changes."
+  when: ipv6_updated is changed
