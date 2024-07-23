@@ -1,0 +1,13 @@
+# command to use:
+# ansible-playbook playbooks/create_pvm.yml
+
+- name: Proxmox Initialization
+  hosts: proxmox
+  vars:
+    ansible_python_interpreter: /usr/bin/python3
+    api_user: "{{ lookup('env', 'api_user') }}"
+    api_password: "{{ lookup('env', 'api_password') }}"
+    api_host: "{{ lookup('env', 'api_host') }}"
+    node: "{{ lookup('env', 'node') }}"
+  roles:
+    - create_pvm

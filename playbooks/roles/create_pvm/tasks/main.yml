@@ -1,0 +1,15 @@
+- name: Naming the Virtual Machine
+  set_fact:
+    vm_name: "ubuntu-{{ lookup('password', '/dev/null', chars=['ascii_lowercase', 'digits'], length=9) }}"
+
+- name: Cloning a Ubuntu Jammy Template
+  proxmox_kvm:
+    api_user: "{{ api_user }}"
+    api_password: "{{ api_password }}"
+    api_host: "{{ api_host }}"
+    clone: ubuntu-jammy-template
+    name: "{{ vm_name }}"
+    node: "{{ node }}"
+    storage: local-zfs
+    format: qcow2
+    timeout: 500

@@ -1,15 +1,36 @@
-- name: Naming the Virtual Machine
-  set_fact:
-    vm_name: "ubuntu-{{ lookup('password', '/dev/null', chars=['ascii_lowercase', 'digits'], length=9) }}"
+- name: Update package cache and dist-upgrade (for Debian/Ubuntu)
+  apt:
+    update_cache: true
+    autoremove: true
+    upgrade: yes
+  when: ansible_pkg_mgr == 'apt'
 
-- name: Cloning a Ubuntu Jammy Template
-  proxmox_kvm:
-    api_user: "{{ api_user }}"
-    api_password: "{{ api_password }}"
-    api_host: "{{ api_host }}"
-    clone: ubuntu-jammy-template
-    name: "{{ vm_name }}"
-    node: "{{ node }}"
-    storage: local-zfs
-    format: qcow2
-    timeout: 500
+- name: Ensure linux-cpupower is installed
+  package:
+    name: linux-cpupower
+    state: present
+
+- name: Disable C-states 1, 2, and 3 for all CPUs
+  ansible.builtin.shell: cpupower idle-set -d 1 && cpupower idle-set -d 2 && cpupower idle-set -d 3
+  changed_when: false
+
+- name: Ensure C-states 1 remain disabled after reboot
+  cron:
+    name: "Disable C-states 1"
+    special_time: reboot
+    user: root
+    job: "cpupower idle-set -d 1"
+
+- name: Ensure C-states 2 remain disabled after reboot
+  cron:
+    name: "Disable C-states 2"
+    special_time: reboot
+    user: root
+    job: "cpupower idle-set -d 2"
+
+- name: Ensure C-states 3 remain disabled after reboot
+  cron:
+    name: "Disable C-states 3"
+    special_time: reboot
+    user: root
+    job: "cpupower idle-set -d 3"
