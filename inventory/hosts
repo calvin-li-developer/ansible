@@ -4,6 +4,6 @@
 [ubuntu]
 10.0.0.101      ansible_connection=ssh      ansible_user=ubuntu
 10.0.0.104      ansible_connection=ssh      ansible_user=ubuntu
-10.0.53.10      ansible_connection=ssh      ansible_user=ubuntu
-10.0.53.20      ansible_connection=ssh      ansible_user=ubuntu
+10.1.53.10      ansible_connection=ssh      ansible_user=ubuntu
+10.2.53.20      ansible_connection=ssh      ansible_user=ubuntu
 10.0.10.100     ansible_connection=ssh      ansible_user=ubuntu
