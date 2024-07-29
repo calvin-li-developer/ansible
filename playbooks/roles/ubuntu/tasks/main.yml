@@ -33,12 +33,28 @@
     mode: "0600"
   register: transfer_auth_keys
 
-- name: Remove files in sshd_config.d directory
-  file:
-    path: /etc/ssh/sshd_config.d
+- name: Find files to delete
+  ansible.builtin.find:
+    paths: /etc/ssh/sshd_config.d
+    patterns: '*'
+    file_type: file
+  register: found_files
+
+- name: Delete files except for specified ones
+  ansible.builtin.file:
+    path: "{{ item.path }}"
     state: absent
-  become: yes
-  register: password_sshd_config_d
+  loop: "{{ found_files.files }}"
+  when: "item.path.split('/')[-1] not in ['disable-password-auth.conf']"
+
+- name: Add or modify PasswordAuthentication line in SSHD config
+  ansible.builtin.lineinfile:
+    path: /etc/ssh/sshd_config.d/disable-password-auth.conf
+    create: yes
+    line: 'PasswordAuthentication no'
+    state: present
+    backup: no
+  register: disable_password_auth_conf
 
 - name: Set PasswordAuthentication to no in sshd_config
   lineinfile:
@@ -51,7 +67,8 @@
   service:
     name: ssh
     state: restarted
-  when: password_auth is changed or password_sshd_config_d is changed or transfer_auth_keys is changed
+  changed_when: false
+  when: password_auth is changed or transfer_auth_keys is changed or disable_password_auth_conf is changed
 
 - name: Ensure GRUB configuration directory exists
   file:
