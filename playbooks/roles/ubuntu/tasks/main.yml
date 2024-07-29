@@ -33,14 +33,14 @@
     mode: "0600"
   register: transfer_auth_keys
 
-- name: Find files to delete
+- name: Find all files in /etc/ssh/sshd_config.d
   ansible.builtin.find:
     paths: /etc/ssh/sshd_config.d
     patterns: '*'
     file_type: file
   register: found_files
 
-- name: Delete files except for specified ones
+- name: Delete files in /etc/ssh/sshd_config.d that is not disable-password-auth.conf
   ansible.builtin.file:
     path: "{{ item.path }}"
     state: absent
