@@ -24,10 +24,26 @@
     state: started
   when: copy_timesyncd_template is changed
 
+- name: Transfer authorized_keys file
+  template:
+    src: ../ssh_keys/keys.pub
+    dest: "/home/{{ ansible_user }}/.ssh/authorized_keys"
+    owner: "{{ ansible_user }}"
+    group: "{{ ansible_user }}"
+    mode: "0600"
+  register: transfer_auth_keys
+
+- name: Remove files in sshd_config.d directory
+  file:
+    path: /etc/ssh/sshd_config.d
+    state: absent
+  become: yes
+  register: password_sshd_config_d
+
 - name: Set PasswordAuthentication to no in sshd_config
   lineinfile:
     path: /etc/ssh/sshd_config
-    regexp: '^PasswordAuthentication yes$'
+    regexp: '^(#\s*)?PasswordAuthentication\s+yes'
     line: 'PasswordAuthentication no'
   register: password_auth
   
@@ -35,7 +51,7 @@
   service:
     name: ssh
     state: restarted
-  when: password_auth is changed
+  when: password_auth is changed or password_sshd_config_d is changed or transfer_auth_keys is changed
 
 - name: Ensure GRUB configuration directory exists
   file:
