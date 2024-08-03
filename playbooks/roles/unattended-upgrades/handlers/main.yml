@@ -1,0 +1,3 @@
+- name: reload unattended-upgrades
+  ansible.builtin.command:
+    cmd: dpkg-reconfigure -f noninteractive -plow unattended-upgrades

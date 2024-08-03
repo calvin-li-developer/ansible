@@ -1,8 +1,8 @@
 [proxmox]
-10.0.0.150      ansible_connection=ssh      ansible_user=root
+10.0.0.150          ansible_user=root
 
 [ubuntu]
-10.0.0.104      ansible_connection=ssh      ansible_user=ubuntu
-10.1.53.10      ansible_connection=ssh      ansible_user=ubuntu
-10.2.53.20      ansible_connection=ssh      ansible_user=ubuntu
-10.0.10.100     ansible_connection=ssh      ansible_user=ubuntu
+10.0.0.104          ansible_user=ubuntu
+10.1.53.10          ansible_user=ubuntu
+10.2.53.20          ansible_user=ubuntu
+10.0.10.100         ansible_user=ubuntu

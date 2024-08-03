@@ -1,7 +1,6 @@
 - name: Update package cache and dist-upgrade (for Debian/Ubuntu)
   apt:
     update_cache: true
-    autoremove: true
     upgrade: yes
   when: ansible_pkg_mgr == 'apt'
 
@@ -15,21 +14,21 @@
   changed_when: false
 
 - name: Ensure C-states 1 remain disabled after reboot
-  cron:
+  ansible.builtin.cron:
     name: "Disable C-states 1"
     special_time: reboot
     user: root
     job: "cpupower idle-set -d 1"
 
 - name: Ensure C-states 2 remain disabled after reboot
-  cron:
+  ansible.builtin.cron:
     name: "Disable C-states 2"
     special_time: reboot
     user: root
     job: "cpupower idle-set -d 2"
 
 - name: Ensure C-states 3 remain disabled after reboot
-  cron:
+  ansible.builtin.cron:
     name: "Disable C-states 3"
     special_time: reboot
     user: root

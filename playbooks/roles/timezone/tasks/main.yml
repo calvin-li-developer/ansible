@@ -1,0 +1,12 @@
+- name: Set Timezone
+  community.general.timezone:
+    name: "{{ tz }}"
+    
+- name: Copy over the timesyncd config
+  ansible.builtin.template: 
+    src: timesyncd.conf
+    dest: /etc/systemd/timesyncd.conf
+    owner: root
+    group: root
+    mode: 0644
+  notify: restart timesyncd daemon  

@@ -5,10 +5,12 @@
   hosts: ubuntu
   become: true
   gather_facts: true
-  vars:
-    arch_mapping:
-      x86_64: amd64
-      aarch64: arm64
-    ansible_become_pass: "{{ lookup('env', 'ansible_become_pass') }}"
   roles:
-    - ubuntu
+    - update
+    - timezone
+    - ssh-key
+    - no-password-auth
+    - disable-ipv6
+    - unattended-upgrades
+    - qemu-guest-agent
+    - docker
