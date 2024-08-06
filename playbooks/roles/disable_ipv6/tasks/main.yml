@@ -13,7 +13,7 @@
     line: 'GRUB_CMDLINE_LINUX_DEFAULT="quiet splash ipv6.disable=1"'
   notify: 
     - Update grub
-  register: update_grub_line1
+    - Reboot server
 
 - name: Ensure GRUB_CMDLINE_LINUX contains "ipv6.disable=1"
   ansible.builtin.lineinfile:
@@ -22,9 +22,4 @@
     line: 'GRUB_CMDLINE_LINUX="ipv6.disable=1"'
   notify:
     - Update grub
-  register: update_grub_line2
-
-- name: Reboot server
-  ansible.builtin.reboot:
-    msg: "Reboot initiated by Ansible for applying GRUB changes."
-  when: update_grub_line1 is changed or update_grub_line2 is changed
+    - Reboot server
