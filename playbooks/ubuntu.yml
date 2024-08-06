@@ -8,9 +8,9 @@
   roles:
     - update
     - timezone
-    - ssh-key
-    - no-password-auth
+    - ssh_key
+    - no_password_auth
     - disable-ipv6
-    - unattended-upgrades
-    - qemu-guest-agent
+    - unattended_upgrades
+    - qemu-guest_agent
     - docker

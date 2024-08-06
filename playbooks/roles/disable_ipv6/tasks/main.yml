@@ -32,10 +32,10 @@
     path: /etc/default/grub
     regexp: '^GRUB_CMDLINE_LINUX='
     line: 'GRUB_CMDLINE_LINUX="ipv6.disable=1"'
-  notify: 
+  notify:
     - Update grub
   register: update_grub_line2
-  
+
 - name: Reboot server
   ansible.builtin.reboot:
     msg: "Reboot initiated by Ansible for applying GRUB changes."
