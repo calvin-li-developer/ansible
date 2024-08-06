@@ -4,6 +4,6 @@
 
 - name: Proxmox Initialization
   hosts: proxmox
-  become: true    
+  become: true
   roles:
     - proxmox
