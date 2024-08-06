@@ -10,7 +10,7 @@
     - timezone
     - ssh_key
     - no_password_auth
-    - disable-ipv6
+    - disable_ipv6
     - unattended_upgrades
-    - qemu-guest_agent
+    - qemu_guest_agent
     - docker
