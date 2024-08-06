@@ -1,6 +1,6 @@
 - name: Set Timezone
   community.general.timezone:
-    name: "{{ tz }}"
+    name: "{{ timezone_location }}"
     
 - name: Copy over the timesyncd config
   ansible.builtin.template: 

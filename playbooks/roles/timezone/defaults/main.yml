@@ -1,2 +1,1 @@
-tz: America/Toronto
-ansible_become_pass: "{{ lookup('env', 'ansible_become_pass') }}"
+timezone_location: America/Toronto
