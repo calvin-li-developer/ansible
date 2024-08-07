@@ -9,3 +9,7 @@
 skip_list:
   - yaml[new-line-at-end-of-file]
   - yaml[trailing-spaces]
+
+# List of additional collections to allow in only-builtins rule.
+only_builtins_allow_collections:
+  - community.general
