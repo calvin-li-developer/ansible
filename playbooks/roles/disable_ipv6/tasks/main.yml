@@ -11,8 +11,7 @@
     path: /etc/default/grub
     regexp: '^GRUB_CMDLINE_LINUX_DEFAULT='
     line: 'GRUB_CMDLINE_LINUX_DEFAULT="quiet splash ipv6.disable=1"'
-  notify: 
-    - Update grub
+  notify:
     - Reboot server
 
 - name: Ensure GRUB_CMDLINE_LINUX contains "ipv6.disable=1"
@@ -21,5 +20,8 @@
     regexp: '^GRUB_CMDLINE_LINUX='
     line: 'GRUB_CMDLINE_LINUX="ipv6.disable=1"'
   notify:
-    - Update grub
     - Reboot server
+
+- name: Update grub
+  ansible.builtin.command:
+    cmd: update-grub

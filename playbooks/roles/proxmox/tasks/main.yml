@@ -1,11 +1,11 @@
 - name: Update package cache and dist-upgrade (for Debian/Ubuntu)
-  apt:
+  ansible.builtin.apt:
     update_cache: true
-    upgrade: yes
+    upgrade: true
   when: ansible_pkg_mgr == 'apt'
 
 - name: Ensure linux-cpupower is installed
-  package:
+  ansible.builtin.package:
     name: linux-cpupower
     state: present
 

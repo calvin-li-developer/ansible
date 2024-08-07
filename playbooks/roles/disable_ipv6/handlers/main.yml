@@ -1,7 +1,3 @@
-- name: Update grub
-  ansible.builtin.command:
-    cmd: update-grub
-
 - name: Reboot server
   ansible.builtin.reboot:
     msg: "Reboot initiated by Ansible for applying GRUB changes."

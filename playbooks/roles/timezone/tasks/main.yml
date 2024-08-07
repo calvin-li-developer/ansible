@@ -9,4 +9,4 @@
     owner: root
     group: root
     mode: "0644"
-  notify: restart timesyncd daemon  
+  notify: Restart timesyncd daemon  

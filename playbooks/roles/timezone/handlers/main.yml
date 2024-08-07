@@ -1,4 +1,4 @@
-- name: restart timesyncd daemon
+- name: Restart timesyncd daemon
   ansible.builtin.service:
     name: systemd-timesyncd
     state: restarted
