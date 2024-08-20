@@ -62,3 +62,21 @@
     append: true
   become: true
   when: is_docker_installed is failed
+
+- name: Create .docker directory if it does not exist
+  ansible.builtin.file:
+    path: "/home/{{ ansible_user }}/.docker"
+    state: directory
+    owner: "{{ ansible_user }}"
+    group: "{{ ansible_user }}"
+    mode: "0775"
+
+- name: Create config.json file in $HOME/.docker/ directory
+  ansible.builtin.template:
+    src: config.json
+    dest: "/home/{{ ansible_user }}/.docker/config.json"
+    owner: "{{ ansible_user }}"
+    group: "{{ ansible_user }}"
+    mode: "0664"
+    variable_end_string: null
+    variable_start_string: null
