@@ -1,0 +1,6 @@
+- name: Ensure NOPASSWD for ansible_user in sudoers file
+  ansible.builtin.lineinfile:
+    path: /etc/sudoers
+    line: "{{ ansible_user }} ALL=(ALL:ALL) NOPASSWD:ALL"
+    validate: "visudo -cf %s"
+    state: present

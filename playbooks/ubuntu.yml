@@ -12,6 +12,7 @@
     - timezone
     - ssh_key
     - no_password_auth
+    - sudoers
     - disable_ipv6
     - unattended_upgrades
     - qemu_guest_agent
