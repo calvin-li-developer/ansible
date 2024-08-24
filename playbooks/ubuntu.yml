@@ -13,6 +13,7 @@
     - ssh_key
     - no_password_auth
     - sudoers
+    - alias
     - disable_ipv6
     - unattended_upgrades
     - qemu_guest_agent

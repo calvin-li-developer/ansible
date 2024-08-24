@@ -1,0 +1,7 @@
+- name: Ensure .bashrc contains pkgupdate alias
+  ansible.builtin.lineinfile:
+    path: /home/{{ ansible_user }}/.bashrc
+    line: "alias pkgupdate='sudo apt update && sudo apt upgrade -y'"
+    create: true
+    state: present
+    mode: "0644"
