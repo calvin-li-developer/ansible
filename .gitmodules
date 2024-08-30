@@ -1,0 +1,3 @@
+[submodule "docker-compose-templates"]
+	path = docker-compose-templates
+	url = https://github.com/calvin-li-developer/docker-compose-templates
