@@ -1,7 +1,7 @@
 - name: Ensure .bashrc contains pkgupdate alias
   ansible.builtin.lineinfile:
     path: /home/{{ ansible_user }}/.bashrc
-    line: "alias pkgupdate='sudo apt update && sudo apt upgrade -y'"
+    line: alias pkgupdate="sudo apt update && sudo apt upgrade -y && echo '' && echo 'Running Watchtower Container Update ...' && docker run --rm -v /var/run/docker.sock:/var/run/docker.sock containrrr/watchtower --run-once"
     create: true
     state: present
     mode: "0644"
