@@ -11,7 +11,7 @@
     - update
     - timezone
     - ssh_key
-    - no_password_auth
+    - hardening
     - sudoers
     - alias
     - disable_ipv6

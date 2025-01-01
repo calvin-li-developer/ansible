@@ -1,7 +1,9 @@
 [proxmox]
-10.0.0.150          ansible_user=root
 
 [ubuntu]
-10.0.53.10          ansible_user=ubuntu
-10.0.53.20          ansible_user=ubuntu
-10.0.10.100         ansible_user=ubuntu
+dns1.internal               ansible_user=ubuntu
+dns2.internal               ansible_user=ubuntu
+jarvis.internal             ansible_user=ubuntu
+
+selfhosted.cloud.internal   ansible_user=ubuntu
+vault.cloud.internal        ansible_user=ubuntu
