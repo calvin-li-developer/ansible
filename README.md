@@ -7,7 +7,7 @@ Useful Ansible Playbooks for setting up servers and provisioning Proxmox VM.
     - alias
     - disable_ipv6
     - docker
-    - no_password_auth
+    - hardening
     - qemu_guest_agent
     - ssh_key
     - sudoers
