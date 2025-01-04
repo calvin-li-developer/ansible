@@ -1,6 +1,6 @@
 - name: Ensure NOPASSWD for ansible_user in sudoers file
   ansible.builtin.lineinfile:
-    path: /etc/sudoers.d/no-password.conf
+    path: /etc/sudoers.d/no-password
     create: true
     line: '{{ ansible_user }} ALL=(ALL:ALL) NOPASSWD:ALL'
     state: present
