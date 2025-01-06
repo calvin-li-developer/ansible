@@ -1,0 +1,7 @@
+- name: Ensure .nanorc contains syntax highlighting
+  ansible.builtin.template:
+    src: .nanorc
+    dest: "/home/{{ ansible_user }}/.nanorc"
+    owner: "{{ ansible_user }}"
+    group: "{{ ansible_user }}"
+    mode: "0644"
