@@ -2,7 +2,7 @@
 
 Useful Ansible Playbooks for setting up servers and provisioning Proxmox VM.
 
-- Proxmox Playbook (WIP)
+- Proxmox Playbook (Future Implementation)
 - Ubuntu 24.04 Playbook (✔️)
     - alias
     - disable_ipv6

@@ -1,5 +1,3 @@
-[proxmox]
-
 [ubuntu]
 dns1.internal               ansible_user=ubuntu
 dns2.internal               ansible_user=ubuntu

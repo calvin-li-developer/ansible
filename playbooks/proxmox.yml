@@ -1,9 +1,0 @@
-# Please remember to add ssh public key to proxmox instance before using
-# command to use:
-# ansible-playbook playbooks/proxmox.yml
-
-- name: Proxmox Initialization
-  hosts: proxmox
-  become: true
-  roles:
-    - proxmox
