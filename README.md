@@ -1,6 +1,6 @@
 # ansible server & infrastructure playbooks 
 
-Useful Ansible Playbooks for setting up Ubuntu sgitervers and provisioning Proxmox VM.
+Useful Ansible Playbooks for setting up Ubuntu servers and provisioning Proxmox VM.
 
 - Proxmox Playbook (Future Implementation)
 - Ubuntu 24.04 Playbook (✔️)
