@@ -2,3 +2,4 @@
   ansible.builtin.shell: "source /home/{{ ansible_user }}/.bashrc"
   args:
     executable: /bin/bash
+  changed_when: false
