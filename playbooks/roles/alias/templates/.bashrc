@@ -117,3 +117,11 @@ if ! shopt -oq posix; then
 fi
 
 alias pkgupdate="sudo apt update && sudo apt upgrade -y && echo '' && echo 'Running Watchtower Container Update ...' && docker run --rm -v /var/run/docker.sock:/var/run/docker.sock containrrr/watchtower --run-once --cleanup"
+
+docker() {
+  if [[ "$1" == "ps" && $# -eq 1 ]]; then
+    command docker ps | sort
+  else
+    command docker "$@"
+  fi
+}
