@@ -73,7 +73,7 @@
 
 - name: Create config.json file in $HOME/.docker/ directory
   ansible.builtin.template:
-    src: config.json
+    src: config.json.j2
     dest: "/home/{{ ansible_user }}/.docker/config.json"
     owner: "{{ ansible_user }}"
     group: "{{ ansible_user }}"
