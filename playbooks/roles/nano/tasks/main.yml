@@ -1,6 +1,6 @@
 - name: Ensure .nanorc contains syntax highlighting
   ansible.builtin.template:
-    src: .nanorc
+    src: .nanorc.j2
     dest: "/home/{{ ansible_user }}/.nanorc"
     owner: "{{ ansible_user }}"
     group: "{{ ansible_user }}"
