@@ -1,3 +1,9 @@
+- name: Install nano
+  ansible.builtin.apt:
+    name: nano
+    state: present
+  become: true
+
 - name: Ensure .nanorc contains syntax highlighting
   ansible.builtin.template:
     src: .nanorc.j2

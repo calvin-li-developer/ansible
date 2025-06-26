@@ -1,38 +1,34 @@
-Role Name
-=========
+# Role Name: nano
 
-A brief description of the role goes here.
+## Description
 
-Requirements
-------------
+This role installs and configures the Nano text editor. It performs the following actions:
 
-Any pre-requisites that may not be covered by Ansible itself or the role should be mentioned here. For instance, if the role uses the EC2 module, it may be a good idea to mention in this section that the boto package is required.
+- Installs the `nano` package.
+- Deploys a `.nanorc` file to the user's home directory to enable syntax highlighting for Python, C, HTML, and YAML.
 
-Role Variables
---------------
+## Requirements
 
-A description of the settable variables for this role should go here, including any variables that are in defaults/main.yml, vars/main.yml, and any variables that can/should be set via parameters to the role. Any variables that are read from other roles and/or the global scope (ie. hostvars, group vars, etc.) should be mentioned here as well.
+This role is designed for Debian-based systems (e.g., Ubuntu).
 
-Dependencies
-------------
+## Role Variables
 
-A list of other roles hosted on Galaxy should go here, plus any details in regards to parameters that may need to be set for other roles, or variables that are used from other roles.
+This role has no user-configurable variables in `defaults/main.yml`.
 
-Example Playbook
-----------------
+## Dependencies
 
-Including an example of how to use your role (for instance, with variables passed in as parameters) is always nice for users too:
+This role has no external dependencies.
 
-    - hosts: servers
-      roles:
-         - { role: username.rolename, x: 42 }
+## Example Playbook
 
-License
--------
+Here is an example of how to use this role in a playbook:
+
+```yaml
+- hosts: all
+  roles:
+    - nano
+```
+
+## License
 
 BSD
-
-Author Information
-------------------
-
-An optional section for the role authors to include contact information, or a website (HTML is not allowed).

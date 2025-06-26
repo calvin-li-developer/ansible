@@ -1,38 +1,37 @@
-Role Name
-=========
+# Role Name: timezone
 
-A brief description of the role goes here.
+## Description
 
-Requirements
-------------
+This role configures the system's timezone and NTP synchronization. It performs the following actions:
 
-Any pre-requisites that may not be covered by Ansible itself or the role should be mentioned here. For instance, if the role uses the EC2 module, it may be a good idea to mention in this section that the boto package is required.
+- **Sets the Timezone:** Configures the system to use the timezone specified in the `timezone_location` variable.
+- **Configures NTP:** Deploys a configuration file for `systemd-timesyncd` to use Cloudflare's time server as a fallback NTP server.
 
-Role Variables
---------------
+## Requirements
 
-A description of the settable variables for this role should go here, including any variables that are in defaults/main.yml, vars/main.yml, and any variables that can/should be set via parameters to the role. Any variables that are read from other roles and/or the global scope (ie. hostvars, group vars, etc.) should be mentioned here as well.
+This role is designed for Debian-based systems (e.g., Ubuntu).
 
-Dependencies
-------------
+## Role Variables
 
-A list of other roles hosted on Galaxy should go here, plus any details in regards to parameters that may need to be set for other roles, or variables that are used from other roles.
+- `timezone_location`: The timezone to set for the system. The default value is `America/Toronto`.
 
-Example Playbook
-----------------
+## Dependencies
 
-Including an example of how to use your role (for instance, with variables passed in as parameters) is always nice for users too:
+This role has no external dependencies.
 
-    - hosts: servers
-      roles:
-         - { role: username.rolename, x: 42 }
+## Example Playbook
 
-License
--------
+Here is an example of how to use this role in a playbook, overriding the default timezone:
+
+```yaml
+- hosts: all
+  become: true
+  roles:
+    - role: timezone
+      vars:
+        timezone_location: "America/New_York"
+```
+
+## License
 
 BSD
-
-Author Information
-------------------
-
-An optional section for the role authors to include contact information, or a website (HTML is not allowed).
