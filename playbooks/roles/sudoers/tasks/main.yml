@@ -6,4 +6,4 @@
     state: present
     backup: false
     validate: "visudo -cf %s"
-    mode: "0644"
+    mode: "0600"
