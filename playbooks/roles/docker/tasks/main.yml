@@ -1,82 +1,66 @@
-- name: Check if Docker is already installed
-  ansible.builtin.command:
-    cmd: docker --version
-  ignore_errors: true
-  changed_when: false
-  register: is_docker_installed
+- name: Check if docker-ce is installed
+  ansible.builtin.package_facts:
+    manager: auto
 
-- name: Install Docker required packages
-  ansible.builtin.apt:
-    pkg:
-      - ca-certificates
-      - curl
-      - gnupg
-  when: is_docker_installed is failed
+- name: Install Docker
+  block:
+    - name: Install Docker required packages
+      ansible.builtin.apt:
+        pkg:
+          - ca-certificates
+          - curl
+        state: present
+        update_cache: true
 
-- name: Create directory for Docker's GPG key
-  ansible.builtin.file:
-    path: /etc/apt/keyrings
-    state: directory
-    mode: '0755'
-  when: is_docker_installed is failed
+    - name: Create directory for Docker's GPG key
+      ansible.builtin.file:
+        path: /etc/apt/keyrings
+        state: directory
+        mode: "0755"
 
-- name: Add Docker's official GPG key
-  ansible.builtin.apt_key:
-    url: https://download.docker.com/linux/ubuntu/gpg
-    keyring: /etc/apt/keyrings/docker.gpg
-    state: present
-  when: is_docker_installed is failed
+    - name: Add Docker's official GPG key
+      ansible.builtin.get_url:
+        url: https://download.docker.com/linux/ubuntu/gpg
+        dest: /etc/apt/keyrings/docker.asc
+        mode: "0644"
+        force: true
 
-- name: Set permissions for Docker GPG key
-  ansible.builtin.file:
-    path: /etc/apt/keyrings/docker.gpg
-    mode: '0644'
-  when: is_docker_installed is failed
+    - name: Add Docker repository
+      ansible.builtin.apt_repository:
+        repo: >-
+          deb [arch={{ docker_arch_mapping[ansible_architecture] }}
+          signed-by=/etc/apt/keyrings/docker.asc]
+          https://download.docker.com/linux/ubuntu {{ ansible_distribution_release }} stable
+        state: present
 
-- name: Add Docker repository
-  ansible.builtin.apt_repository:
-    repo: >-
-      deb [arch={{ docker_arch_mapping[ansible_architecture] }}
-      signed-by=/etc/apt/keyrings/docker.gpg]
-      https://download.docker.com/linux/ubuntu {{ ansible_distribution_release }} stable
-    state: present
-  when: is_docker_installed is failed
+    - name: Install Docker if not already installed
+      ansible.builtin.apt:
+        name: "{{ docker_packages }}"
+        state: present
+        update_cache: true
+      notify:
+        - Start and enable docker service
 
-- name: Install Docker if not already installed
-  ansible.builtin.apt:
-    name: "{{ item }}"
-    state: present
-    update_cache: true
-  loop:
-    - docker-ce
-    - docker-ce-cli
-    - containerd.io
-    - docker-buildx-plugin
-    - docker-compose-plugin
-  when: is_docker_installed is failed
-
-- name: Add user to docker group
-  ansible.builtin.user:
-    name: "{{ ansible_user }}"
-    groups: docker
-    append: true
-  become: true
-  when: is_docker_installed is failed
+    - name: Add user to docker group
+      ansible.builtin.user:
+        name: "{{ docker_user }}"
+        groups: docker
+        append: true
+      become: true
+  when: "'docker-ce' not in ansible_facts.packages"
 
 - name: Create .docker directory if it does not exist
   ansible.builtin.file:
-    path: "/home/{{ ansible_user }}/.docker"
+    path: "/home/{{ docker_user }}/.docker"
     state: directory
-    owner: "{{ ansible_user }}"
-    group: "{{ ansible_user }}"
+    owner: "{{ docker_user }}"
+    group: "{{ docker_user }}"
     mode: "0775"
 
 - name: Create config.json file in $HOME/.docker/ directory
   ansible.builtin.template:
     src: config.json.j2
-    dest: "/home/{{ ansible_user }}/.docker/config.json"
-    owner: "{{ ansible_user }}"
-    group: "{{ ansible_user }}"
+    dest: "/home/{{ docker_user }}/.docker/config.json"
+    owner: "{{ docker_user }}"
+    group: "{{ docker_user }}"
     mode: "0664"
-    variable_end_string: null
-    variable_start_string: null
