@@ -3,6 +3,7 @@
     manager: auto
 
 - name: Install Docker
+  when: "'docker-ce' not in ansible_facts.packages"
   block:
     - name: Install Docker required packages
       ansible.builtin.apt:
@@ -47,7 +48,6 @@
         groups: docker
         append: true
       become: true
-  when: "'docker-ce' not in ansible_facts.packages"
 
 - name: Create .docker directory if it does not exist
   ansible.builtin.file:
