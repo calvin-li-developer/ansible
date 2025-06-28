@@ -1,3 +1,12 @@
 docker_arch_mapping:
   x86_64: amd64
   aarch64: arm64
+
+docker_packages:
+  - docker-ce
+  - docker-ce-cli
+  - containerd.io
+  - docker-buildx-plugin
+  - docker-compose-plugin
+
+docker_user: "{{ ansible_user }}"
