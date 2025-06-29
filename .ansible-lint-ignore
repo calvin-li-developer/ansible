@@ -1,1 +1,1 @@
-playbooks/roles/ssh/tasks/main.yml yaml[line-length]
+playbooks/roles/ssh/defaults/main.yml yaml[line-length]
