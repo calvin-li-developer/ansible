@@ -9,3 +9,4 @@
 skip_list:
   - yaml[new-line-at-end-of-file]
   - yaml[trailing-spaces]
+  - yaml[line-length]

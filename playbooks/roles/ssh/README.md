@@ -1,4 +1,4 @@
-# Role Name: ssh_key
+# Role Name: ssh
 
 ## Description
 
