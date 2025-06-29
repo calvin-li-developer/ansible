@@ -8,7 +8,7 @@
   roles:
     - update
     - timezone
-    - ssh_key
+    - ssh
     - hardening
     - sudoers
     - alias
