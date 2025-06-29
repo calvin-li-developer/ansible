@@ -7,8 +7,6 @@
 # When putting ignores inside the ignore file, they are marked as ignored, but
 # still visible, making it easier to address later.
 
-playbooks/roles/ssh/tasks/main.yml yaml[line-length]
-
 skip_list:
   - yaml[new-line-at-end-of-file]
   - yaml[trailing-spaces]
