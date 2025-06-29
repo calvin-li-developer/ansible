@@ -2,7 +2,7 @@
 
 ## Description
 
-This role deploys a set of authorized SSH keys to a user's `~/.ssh/authorized_keys` file. This allows the specified public keys to be used for SSH authentication.
+This role uses the `ansible.posix.authorized_key` module to manage SSH keys in a user's `~/.ssh/authorized_keys` file. This allows for the dynamic addition and removal of SSH keys.
 
 ## Requirements
 
@@ -10,7 +10,15 @@ This role is designed for Debian-based systems (e.g., Ubuntu).
 
 ## Role Variables
 
-This role has no user-configurable variables in `defaults/main.yml`.
+This role uses the following variables, defined in `defaults/main.yml`:
+
+- `ssh_keys`: A list of public SSH keys to be added to the `authorized_keys` file.
+
+```yaml
+ssh_keys:
+  - "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIE... key1"
+  - "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQD... user@host"
+```
 
 ## Dependencies
 
@@ -23,7 +31,11 @@ Here is an example of how to use this role in a playbook:
 ```yaml
 - hosts: all
   roles:
-    - ssh_key
+    - role: ssh_key
+      vars:
+        ssh_keys:
+          - "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAI... key1"
+          - "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACA... user@host"
 ```
 
 ## License

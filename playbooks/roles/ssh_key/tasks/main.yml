@@ -1,7 +1,15 @@
-- name: Transfer authorized_keys file
-  ansible.builtin.template:
-    src: ssh_keys.pub.j2
-    dest: "/home/{{ ansible_user }}/.ssh/authorized_keys"
+- name: Create .ssh directory
+  ansible.builtin.file:
+    path: "/home/{{ ansible_user }}/.ssh"
+    state: directory
     owner: "{{ ansible_user }}"
     group: "{{ ansible_user }}"
-    mode: "0600"
+    mode: "0700"
+
+- name: "Set authorized keys for {{ ansible_user }}"
+  ansible.posix.authorized_key:
+    user: "{{ ansible_user }}"
+    key: "{{ item }}"
+    state: present
+    exclusive: false
+  loop: "{{ ssh_keys }}"
