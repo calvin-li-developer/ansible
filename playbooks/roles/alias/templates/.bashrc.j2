@@ -120,7 +120,10 @@ alias pkgupdate="sudo apt update && sudo apt upgrade -y && echo '' && echo 'Runn
 
 docker() {
   if [[ "$1" == "ps" && $# -eq 1 ]]; then
-    command docker ps | sort
+    header=$(command docker ps | head -n 1)
+    body=$(command docker ps | tail -n +2 | sort)
+    echo "$header"
+    echo "$body"
   else
     command docker "$@"
   fi
