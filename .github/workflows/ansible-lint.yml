@@ -21,7 +21,41 @@ jobs:
     runs-on: ubuntu-latest
     if: github.event_name == 'pull_request'
     steps:
+      - name: Check for concurrent workflow runs
+        id: check_concurrent_runs
+        uses: actions/github-script@60a0d83039c74a4aee543508d2ffcb1c3799cdea # v7.0.1
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          script: |
+            const workflow_runs = await github.rest.actions.listWorkflowRunsForRepo({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              workflow_id: 'ansible-lint.yml',
+              event: 'pull_request',
+              status: 'in_progress',
+            });
+
+            const current_pr_number = context.issue.number;
+            const current_run_id = context.runId;
+
+            const other_runs_for_pr = workflow_runs.data.workflow_runs.filter(run => {
+              if (run.id === current_run_id) {
+                return false;
+              }
+              const pr_for_run = run.pull_requests.find(pr => pr.number === current_pr_number);
+              return !!pr_for_run;
+            });
+
+            if (other_runs_for_pr.length > 0) {
+              console.log(`Found ${other_runs_for_pr.length} other running workflows for PR #${current_pr_number}.`);
+              core.exportVariable('MERGE', 'false');
+            } else {
+              console.log(`No other running workflows found for PR #${current_pr_number}.`);
+              core.exportVariable('MERGE', 'true');
+            }
+              
       - name: Merge PR
+        if: ${{ env.MERGE == 'true' }}
         uses: actions/github-script@60a0d83039c74a4aee543508d2ffcb1c3799cdea # v7.0.1
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
