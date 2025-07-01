@@ -20,6 +20,7 @@ jobs:
 
   merge:
     needs: lint
+    name: Merge PR
     runs-on: ubuntu-latest
     env:
       MERGE: 'undefined'
