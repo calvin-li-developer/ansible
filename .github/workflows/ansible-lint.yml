@@ -4,6 +4,8 @@ on:
   workflow_dispatch:
   pull_request:
     branches: ["main", "stable", "release/v*"]
+    paths:
+      - '**.yml'
 
 permissions:
   pull-requests: write
