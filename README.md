@@ -9,7 +9,7 @@ Useful Ansible Playbooks for setting up Ubuntu servers and provisioning Proxmox 
     - docker
     - hardening
     - qemu_guest_agent
-    - ssh_key
+    - ssh
     - sudoers
     - timezone
     - unattended_upgrades
