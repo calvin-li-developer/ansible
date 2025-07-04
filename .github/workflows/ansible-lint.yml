@@ -23,7 +23,7 @@ jobs:
     runs-on: ubuntu-latest
     env:
       MERGE: 'undefined'
-    if: github.event_name == 'pull_request'
+    if: ${{ github.event_name == 'pull_request' && github.event.pull_request.user.login == github.repository_owner }}
     steps:
       - name: Check for concurrent workflow runs
         id: check_concurrent_runs
