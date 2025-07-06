@@ -6,8 +6,9 @@
     group: "{{ ansible_user }}"
     mode: "0700"
 
-- name: "Set authorized keys for {{ ansible_user }} from github"
+- name: "Set authorized keys from github for {{ ansible_user }}"
   ansible.posix.authorized_key:
     user: "{{ ansible_user }}"
-    key: "https://github.com/{{ github_user }}.keys"
+    key: "https://github.com/{{ ssh_github_user }}.keys"
     state: present
+    exclusive: true

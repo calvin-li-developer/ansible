@@ -12,10 +12,10 @@ This role is designed for Debian-based systems (e.g., Ubuntu).
 
 This role uses the following variables, defined in `defaults/main.yml`:
 
-- `github_user`: The github username to fetch the ssh keys from.
+- `ssh_github_user`: The github username to fetch the ssh keys from.
 
 ```yaml
-github_user: "username"
+ssh_github_user: "username"
 ```
 
 ## Dependencies
@@ -31,7 +31,7 @@ Here is an example of how to use this role in a playbook:
   roles:
     - role: ssh
       vars:
-        github_user: "username"
+        ssh_github_user: "username"
 ```
 
 ## License
