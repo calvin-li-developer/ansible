@@ -2,7 +2,7 @@
 
 ## Description
 
-This role uses the `ansible.posix.authorized_key` module to manage SSH keys in a user's `~/.ssh/authorized_keys` file. This allows for the dynamic addition and removal of SSH keys.
+This role uses the `ansible.posix.authorized_key` module to manage SSH keys in a user's `~/.ssh/authorized_keys` file. This allows for the dynamic addition and removal of SSH keys from a github user's `.keys` file.
 
 ## Requirements
 
@@ -12,12 +12,10 @@ This role is designed for Debian-based systems (e.g., Ubuntu).
 
 This role uses the following variables, defined in `defaults/main.yml`:
 
-- `ssh_keys`: A list of public SSH keys to be added to the `authorized_keys` file.
+- `github_user`: The github username to fetch the ssh keys from.
 
 ```yaml
-ssh_keys:
-  - "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIE... key1"
-  - "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQD... user@host"
+github_user: "username"
 ```
 
 ## Dependencies
@@ -31,11 +29,9 @@ Here is an example of how to use this role in a playbook:
 ```yaml
 - hosts: all
   roles:
-    - role: ssh_key
+    - role: ssh
       vars:
-        ssh_keys:
-          - "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAI... key1"
-          - "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACA... user@host"
+        github_user: "username"
 ```
 
 ## License
