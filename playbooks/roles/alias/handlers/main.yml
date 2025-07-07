@@ -3,3 +3,9 @@
   args:
     executable: /bin/bash
   changed_when: false
+
+- name: Reload zshrc
+  ansible.builtin.shell: "source /home/{{ ansible_user }}/.zshrc"
+  args:
+    executable: /bin/zsh
+  changed_when: false

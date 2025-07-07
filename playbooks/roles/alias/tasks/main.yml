@@ -8,3 +8,20 @@
     group: "{{ ansible_user }}"
     mode: "0644"
   notify: Reload bashrc
+
+- name: Stat Check .zshrc file
+  ansible.builtin.stat:
+    path: "/home/{{ ansible_user }}/.zshrc"
+  register: zshrc
+
+- name: Ensure .zshrc contains alias
+  ansible.builtin.blockinfile:
+    path: "/home/{{ ansible_user }}/.zshrc"
+    block: "{{ lookup('template', 'aliases.j2') }}"
+    marker: "# {mark} ANSIBLE MANAGED BLOCK"
+    create: true
+    owner: "{{ ansible_user }}"
+    group: "{{ ansible_user }}"
+    mode: "0644"
+  notify: Reload zshrc
+  when: zshrc.stat.exists
