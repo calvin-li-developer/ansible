@@ -6,7 +6,7 @@ on:
     branches: ["main", "stable", "release/v*"]
     paths:
       - '**.yml'
-      - '**.ini*
+      - '**.ini*'
 
 permissions:
   pull-requests: write
