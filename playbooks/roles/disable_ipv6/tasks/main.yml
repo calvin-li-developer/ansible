@@ -25,5 +25,4 @@
 - name: Update grub
   ansible.builtin.command:
     cmd: update-grub
-  register: update_grub
-  changed_when: update_grub.rc != 0
+  changed_when: false
