@@ -12,7 +12,7 @@ docker() {
 git() {
   if [[ "$1" == "pull" && $# -eq 1 ]]; then
     default_branch=$(git remote show origin | awk '/HEAD branch/ {print $NF}')
-    git pull origin $default_branch --rebase && git push
+    git pull origin $default_branch --rebase && git push --force
   else
     command git "$@"
   fi
