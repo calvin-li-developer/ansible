@@ -3,6 +3,5 @@ updates:
   - package-ecosystem: "github-actions"
     directory: "/"  # Root directory of workflow files
     schedule:
-      interval: "daily"
-      time: "07:00" # 2 AM EST / 3 AM EDT
+      cronjob: 0 2 * * *
       timezone: "America/New_York"
