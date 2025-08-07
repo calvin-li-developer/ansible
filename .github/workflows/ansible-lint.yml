@@ -2,6 +2,11 @@
 name: Ansible Lint
 on:
   workflow_dispatch:
+
+  push:
+    branches:
+      - main
+      
   pull_request:
     branches: ["main", "stable", "release/v*"]
     paths:
