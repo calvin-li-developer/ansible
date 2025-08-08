@@ -1,0 +1,84 @@
+name: CI
+on:
+  workflow_dispatch:
+
+  push:
+    branches:
+      - main
+    tags:
+      - '*'
+
+  pull_request:
+    branches: ["main", "stable", "release/v*"]
+    paths:
+      - '**.yml'
+      - '**.ini'
+      - '**.j2'
+
+  schedule:
+    - cron: '30 6 * * *'
+
+permissions:
+  pull-requests: write
+  contents: write
+  security-events: write
+
+jobs:
+  lint:
+    if: github.event_name != 'schedule'
+    name: Ansible Lint # Naming the build is important to use it as a status check
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout GitHub Repository
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+
+      - name: Run ansible-lint
+        uses: ansible/ansible-lint@9765b8704b2c3f4ab782815b528e0393662e1c04 # v25.7.0
+        with:
+          args: "--profile production"
+
+  trivy-scan:
+    if: ${{ github.repository == 'calvin-li-developer/ansible' }}
+    name: Trivy Scan
+    permissions:
+      contents: read
+      actions: read
+      security-events: write
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+        with:
+          persist-credentials: false
+
+      - name: Run Trivy vulnerability scanner
+        uses: aquasecurity/trivy-action@dc5a429b52fcf669ce959baa2c2dd26090d2a6c4 # v0.32.0
+        with:
+          scan-type: repo
+          ignore-unfixed: true
+          format: sarif
+          output: trivy-results.sarif
+          severity: CRITICAL,HIGH
+          exit-code: '1'
+
+      - name: Upload Trivy scan results to GitHub Security tab
+        uses: github/codeql-action/upload-sarif@51f77329afa6477de8c49fc9c7046c15b9a4e79d # v3.29.5
+        with:
+          sarif_file: 'trivy-results.sarif'
+
+  merge:
+    needs: [lint, trivy-scan]
+    name: Merge PR
+    runs-on: ubuntu-latest
+    concurrency:
+      group: ${{ github.workflow }}-${{ github.ref }}
+      cancel-in-progress: true
+    if: ${{ github.event_name == 'pull_request' && github.event.pull_request.user.login == github.repository_owner }}
+    steps:
+      - name: Merge PR
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          gh pr merge ${{ github.event.pull_request.number }} --auto --squash --repo ${{ github.repository }}
