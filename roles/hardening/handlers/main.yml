@@ -2,3 +2,6 @@
   ansible.builtin.service:
     name: ssh
     state: restarted
+  tags:
+    - hardening
+    - handlers

@@ -5,3 +5,6 @@
     update_cache: true
   become: true
   when: ansible_system_vendor == "QEMU"
+  tags:
+    - qemu_guest_agent
+    - packages

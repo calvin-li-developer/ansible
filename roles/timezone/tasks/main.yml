@@ -1,6 +1,9 @@
 - name: Set Timezone
   community.general.timezone:
     name: "{{ timezone_location }}"
+  tags:
+    - timezone
+    - config
     
 - name: Copy over the timesyncd config
   ansible.builtin.template: 
@@ -10,3 +13,6 @@
     group: root
     mode: "0644"
   notify: Restart timesyncd daemon  
+  tags:
+    - timezone
+    - config

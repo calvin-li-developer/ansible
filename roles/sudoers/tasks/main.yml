@@ -7,3 +7,6 @@
     backup: false
     validate: "visudo -cf %s"
     mode: "0600"
+  tags:
+    - sudoers
+    - security

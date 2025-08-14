@@ -1,0 +1,9 @@
+galaxy_info:
+  author: internal
+  description: Install nano and configure syntax highlighting
+  license: MIT
+  min_ansible_version: '2.18'
+  platforms:
+    - name: Ubuntu
+      versions: ['all']
+dependencies: []

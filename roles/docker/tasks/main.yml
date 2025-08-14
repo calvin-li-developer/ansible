@@ -1,6 +1,8 @@
 - name: Check if docker-ce is installed
   ansible.builtin.package_facts:
     manager: auto
+  tags:
+    - docker
 
 - name: Install Docker
   when: "'docker-ce' not in ansible_facts.packages"
@@ -12,12 +14,18 @@
           - curl
         state: present
         update_cache: true
+      tags:
+        - docker
+        - packages
 
     - name: Create directory for Docker's GPG key
       ansible.builtin.file:
         path: /etc/apt/keyrings
         state: directory
         mode: "0755"
+      tags:
+        - docker
+        - config
 
     - name: Add Docker's official GPG key
       ansible.builtin.get_url:
@@ -25,6 +33,9 @@
         dest: /etc/apt/keyrings/docker.asc
         mode: "0644"
         force: true
+      tags:
+        - docker
+        - config
 
     - name: Add Docker repository
       ansible.builtin.apt_repository:
@@ -33,6 +44,9 @@
           signed-by=/etc/apt/keyrings/docker.asc]
           https://download.docker.com/linux/ubuntu {{ ansible_distribution_release }} stable
         state: present
+      tags:
+        - docker
+        - repo
 
     - name: Install Docker if not already installed
       ansible.builtin.apt:
@@ -41,6 +55,9 @@
         update_cache: true
       notify:
         - Start and enable docker service
+      tags:
+        - docker
+        - packages
 
     - name: Add user to docker group
       ansible.builtin.user:
@@ -48,6 +65,9 @@
         groups: docker
         append: true
       become: true
+      tags:
+        - docker
+        - users
 
 - name: Create .docker directory if it does not exist
   ansible.builtin.file:
@@ -56,6 +76,9 @@
     owner: "{{ docker_user }}"
     group: "{{ docker_user }}"
     mode: "0775"
+  tags:
+    - docker
+    - config
 
 - name: Create config.json file in $HOME/.docker/ directory
   ansible.builtin.template:
@@ -64,3 +87,6 @@
     owner: "{{ docker_user }}"
     group: "{{ docker_user }}"
     mode: "0664"
+  tags:
+    - docker
+    - config

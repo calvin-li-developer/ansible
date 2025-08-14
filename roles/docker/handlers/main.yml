@@ -5,3 +5,6 @@
     state: started
     enabled: true
   become: true
+  tags:
+    - docker
+    - handlers

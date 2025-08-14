@@ -1,0 +1,9 @@
+galaxy_info:
+  author: internal
+  description: Configure passwordless sudo for the Ansible user
+  license: MIT
+  min_ansible_version: '2.18'
+  platforms:
+    - name: Ubuntu
+      versions: ['all']
+dependencies: []

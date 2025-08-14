@@ -5,6 +5,9 @@
     mode: '0644'
     create: true
   when: ansible_os_family == 'Debian'
+  tags:
+    - disable_ipv6
+    - kernel
 
 - name: Ensure GRUB_CMDLINE_LINUX_DEFAULT contains "quiet splash ipv6.disable=1"
   ansible.builtin.lineinfile:
@@ -13,6 +16,9 @@
     line: 'GRUB_CMDLINE_LINUX_DEFAULT="quiet splash ipv6.disable=1"'
   notify:
     - Reboot server
+  tags:
+    - disable_ipv6
+    - grub
 
 - name: Ensure GRUB_CMDLINE_LINUX contains "ipv6.disable=1"
   ansible.builtin.lineinfile:
@@ -21,8 +27,14 @@
     line: 'GRUB_CMDLINE_LINUX="ipv6.disable=1"'
   notify:
     - Reboot server
+  tags:
+    - disable_ipv6
+    - grub
 
 - name: Update grub
   ansible.builtin.command:
     cmd: update-grub
   changed_when: false
+  tags:
+    - disable_ipv6
+    - grub
