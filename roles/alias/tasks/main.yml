@@ -1,7 +1,7 @@
 - name: Ensure .bashrc contains alias
   ansible.builtin.blockinfile:
     path: "/home/{{ ansible_user }}/.bashrc"
-    block: "{{ lookup('template', 'aliases.j2') }}"
+    block: "{{ lookup('ansible.builtin.template', 'aliases.j2') }}"
     marker: "# {mark} ANSIBLE MANAGED BLOCK"
     create: true
     owner: "{{ ansible_user }}"
@@ -23,7 +23,7 @@
 - name: Ensure .zshrc contains alias
   ansible.builtin.blockinfile:
     path: "/home/{{ ansible_user }}/.zshrc"
-    block: "{{ lookup('template', 'aliases.j2') }}"
+    block: "{{ lookup('ansible.builtin.template', 'aliases.j2') }}"
     marker: "# {mark} ANSIBLE MANAGED BLOCK"
     create: true
     owner: "{{ ansible_user }}"
