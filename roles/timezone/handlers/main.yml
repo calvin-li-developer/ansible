@@ -2,3 +2,6 @@
   ansible.builtin.service:
     name: systemd-timesyncd
     state: restarted
+  tags:
+    - timezone
+    - handlers

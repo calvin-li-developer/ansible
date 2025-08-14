@@ -8,11 +8,17 @@
     group: "{{ ansible_user }}"
     mode: "0644"
   notify: Reload bashrc
+  tags:
+    - alias
+    - shell
 
 - name: Stat Check .zshrc file
   ansible.builtin.stat:
     path: "/home/{{ ansible_user }}/.zshrc"
   register: alias_zshrc
+  tags:
+    - alias
+    - shell
 
 - name: Ensure .zshrc contains alias
   ansible.builtin.blockinfile:
@@ -25,3 +31,6 @@
     mode: "0644"
   notify: Reload zshrc
   when: alias_zshrc.stat.exists
+  tags:
+    - alias
+    - shell

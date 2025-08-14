@@ -4,6 +4,9 @@
       - unattended-upgrades
       - update-notifier-common
     state: present
+  tags:
+    - unattended_upgrades
+    - packages
 
 - name: Copy over the 50unattended-upgrades config
   ansible.builtin.template: 
@@ -13,3 +16,6 @@
     group: root
     mode: "0644"
   notify: Reload unattended-upgrades
+  tags:
+    - unattended_upgrades
+    - config

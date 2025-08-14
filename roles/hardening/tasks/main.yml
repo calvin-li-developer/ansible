@@ -2,16 +2,22 @@
   ansible.builtin.template:
     src: 01-disable-password-auth.conf.j2
     dest: "/etc/ssh/sshd_config.d/01-disable-password-auth.conf"
-    owner: "{{ ansible_user }}"
-    group: "{{ ansible_user }}"
+    owner: root
+    group: root
     mode: "0644"
   notify: Restart ssh daemon
+  tags:
+    - hardening
+    - ssh
 
 - name: Harden SSH Encryption Requirements
   ansible.builtin.template:
     src: 01-ssh-audit_hardening.conf.j2
     dest: "/etc/ssh/sshd_config.d/01-ssh-audit_hardening.conf"
-    owner: "{{ ansible_user }}"
-    group: "{{ ansible_user }}"
+    owner: root
+    group: root
     mode: "0644"
   notify: Restart ssh daemon
+  tags:
+    - hardening
+    - ssh

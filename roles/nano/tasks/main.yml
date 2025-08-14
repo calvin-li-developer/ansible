@@ -3,6 +3,9 @@
     name: nano
     state: present
   become: true
+  tags:
+    - nano
+    - packages
 
 - name: Ensure .nanorc contains syntax highlighting
   ansible.builtin.template:
@@ -11,3 +14,6 @@
     owner: "{{ ansible_user }}"
     group: "{{ ansible_user }}"
     mode: "0644"
+  tags:
+    - nano
+    - config

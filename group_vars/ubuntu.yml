@@ -1,0 +1,6 @@
+# Common variables for hosts in the `ubuntu` inventory group
+# Override per environment as needed
+
+timezone_location: America/Toronto
+ssh_github_user: "calvin-li-developer"
+docker_user: "{{ ansible_user }}"

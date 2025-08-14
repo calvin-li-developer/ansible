@@ -3,3 +3,6 @@
     cmd: dpkg-reconfigure -f noninteractive -plow unattended-upgrades
   register: unattended_upgrades
   changed_when: unattended_upgrades.rc != 0
+  tags:
+    - unattended_upgrades
+    - handlers
