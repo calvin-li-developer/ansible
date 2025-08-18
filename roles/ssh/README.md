@@ -13,9 +13,11 @@ This role is designed for Debian-based systems (e.g., Ubuntu).
 This role uses the following variables, defined in `defaults/main.yml`:
 
 - `ssh_github_user`: The github username to fetch the ssh keys from.
+- `ansible_user`: The default user for SSH connections (automatically set by Ansible).
 
 ```yaml
 ssh_github_user: "username"
+ansible_user: "ubuntu"  # Default user for SSH connections
 ```
 
 ## Dependencies
@@ -32,6 +34,7 @@ Here is an example of how to use this role in a playbook:
     - role: ssh
       vars:
         ssh_github_user: "username"
+        ansible_user: "ubuntu"
 ```
 
 ## License
