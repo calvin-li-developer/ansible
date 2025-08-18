@@ -11,9 +11,9 @@
     - ssh
     - hardening
     - sudoers
-    - alias
     - nano
     - disable_ipv6
     - unattended_upgrades
     - qemu_guest_agent
-    - docker
+    - { role: alias, when: inventory_hostname != "universal-ssd.35home.internal" }
+    - { role: docker, when: inventory_hostname != "universal-ssd.35home.internal" }
