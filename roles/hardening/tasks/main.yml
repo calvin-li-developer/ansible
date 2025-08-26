@@ -1,7 +1,7 @@
 - name: Disable password SSH Auth
   ansible.builtin.template:
     src: 01-disable-password-auth.conf.j2
-    dest: "/etc/ssh/sshd_config.d/01-disable-password-auth.conf"
+    dest: "/etc/ssh/ssh_config.d/01-disable-password-auth.conf"
     owner: root
     group: root
     mode: "0644"
@@ -13,7 +13,7 @@
 - name: Harden SSH Encryption Requirements
   ansible.builtin.template:
     src: 01-ssh-audit_hardening.conf.j2
-    dest: "/etc/ssh/sshd_config.d/01-ssh-audit_hardening.conf"
+    dest: "/etc/ssh/ssh_config.d/01-ssh-audit_hardening.conf"
     owner: root
     group: root
     mode: "0644"
