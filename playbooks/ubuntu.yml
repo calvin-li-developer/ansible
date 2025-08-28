@@ -13,6 +13,7 @@
     - sudoers
     - nano
     - disable_ipv6
+    - disable_swap
     - unattended_upgrades
     - qemu_guest_agent
     - alias
