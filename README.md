@@ -6,6 +6,7 @@ Useful Ansible Playbooks for setting up Ubuntu servers and provisioning Proxmox 
 - Ubuntu 24.04 Playbook (✔️)
     - alias
     - disable_ipv6
+    - disable_swap
     - docker
     - hardening
     - qemu_guest_agent
