@@ -4,7 +4,7 @@ This role disables swap on the target system.
 
 ## Requirements
 
-None.
+This role is designed for Debian-based systems (e.g., Ubuntu).
 
 ## Role Variables
 
