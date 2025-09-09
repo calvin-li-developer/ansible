@@ -51,7 +51,7 @@ wheels = [
 
 [[package]]
 name = "ansible-dev-environment"
-version = "25.7.0"
+version = "25.8.0"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "ansible-builder" },
@@ -59,9 +59,9 @@ dependencies = [
     { name = "pyyaml" },
     { name = "subprocess-tee" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/52/21/4268efde18db957d82556cccf2cf9120f90907db276d23ff96a6fa76c8f3/ansible_dev_environment-25.7.0.tar.gz", hash = "sha256:a923dfa435150921dcf2607f3e63762d56c394e57227ece08ce91c9494b6f05a", size = 85461, upload-time = "2025-07-29T19:00:56.326Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/90/26/5668f98ae81c76eb3d5b1290407ca356b7f58f8d1eaade88538e915d24f1/ansible_dev_environment-25.8.0.tar.gz", hash = "sha256:76926b4ee57b10be4a5b34e5abeaf4f8728150164e8a71e4121acb92b141dd6d", size = 91942, upload-time = "2025-08-21T13:12:36.037Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/38/50/79d53a84d64bc1b30ca177bc0691910a5926b8ec0c87c0a35751bb3f185b/ansible_dev_environment-25.7.0-py3-none-any.whl", hash = "sha256:4feea19841041b626ab7b2cf5ebe85e54425220d763855627c09f44195ef7233", size = 52144, upload-time = "2025-07-29T19:00:54.672Z" },
+    { url = "https://files.pythonhosted.org/packages/89/bb/df07fa63dc1d1209c365f33a21056f8533fbe16d26312358298e197cc9c1/ansible_dev_environment-25.8.0-py3-none-any.whl", hash = "sha256:110946650480067d698f305493e774b187e72749aa2806f4ae6631066b34735c", size = 53706, upload-time = "2025-08-21T13:12:34.715Z" },
 ]
 
 [[package]]
