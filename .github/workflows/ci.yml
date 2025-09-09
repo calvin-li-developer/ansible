@@ -14,6 +14,7 @@ on:
       - '**.yml'
       - '**.ini'
       - '**.j2'
+      - '**.lock'
 
   schedule:
     - cron: '30 6 * * *'
@@ -25,8 +26,8 @@ permissions:
 
 jobs:
   lint:
-    if: github.event_name != 'schedule'
-    name: Ansible Lint # Naming the build is important to use it as a status check
+    if: ${{ github.repository == 'calvin-li-developer/ansible' && github.event_name != 'schedule' }}
+    name: Ansible Lint
     runs-on: ubuntu-latest
     steps:
       - name: Checkout GitHub Repository
@@ -77,7 +78,14 @@ jobs:
     concurrency:
       group: ${{ github.workflow }}-${{ github.ref }}
       cancel-in-progress: true
-    if: ${{ github.event_name == 'pull_request' && github.event.pull_request.user.login == github.repository_owner }}
+    if: ${{ 
+            github.repository == 'calvin-li-developer/ansible' &&
+            github.event_name == 'pull_request' &&
+            ( 
+              github.event.pull_request.user.login == github.repository_owner ||
+              github.event.pull_request.user.login == 'dependabot[bot]'
+            ) 
+        }}
     steps:
       - name: Merge PR
         env:
