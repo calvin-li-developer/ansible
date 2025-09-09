@@ -14,6 +14,7 @@ on:
       - '**.yml'
       - '**.ini'
       - '**.j2'
+      - '**.lock'
 
   schedule:
     - cron: '30 6 * * *'
