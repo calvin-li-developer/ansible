@@ -18,7 +18,7 @@ Useful Ansible Playbooks for setting up Ubuntu servers and provisioning Proxmox 
 
 ## Pre-requisites
 
-- [uv](https://docs.astral.sh/uv/install/) package manager must be installed.
+- [uv](https://docs.astral.sh/uv/) package manager must be installed.
 
 ## Usage
 
