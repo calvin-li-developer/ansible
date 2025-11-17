@@ -7,6 +7,10 @@
 # When putting ignores inside the ignore file, they are marked as ignored, but
 # still visible, making it easier to address later.
 
+exclude_paths:
+  - .venv/
+  - collections/
+
 skip_list:
   - yaml[new-line-at-end-of-file]
   - yaml[trailing-spaces]
