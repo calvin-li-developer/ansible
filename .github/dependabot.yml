@@ -10,6 +10,8 @@ updates:
       timezone: "America/New_York"
     commit-message:
       prefix: "chore(deps)"
+    cooldown:
+      default-days: 2
   
   - package-ecosystem: "uv"
     target-branch: "main"
@@ -21,3 +23,5 @@ updates:
       timezone: "America/New_York"
     commit-message:
       prefix: "chore(deps)"
+    cooldown:
+      default-days: 2
