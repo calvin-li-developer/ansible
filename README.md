@@ -29,7 +29,7 @@ This project uses [uv](https://docs.astral.sh/uv/getting-started/) as a Python p
 Install Ansible collections locally into the `collections/` directory before running playbooks:
 
 ```bash
-uv run ansible-galaxy collection install -r requirements.yml -p collections
+uv run ansible-galaxy collection install -r requirements.yml
 ```
 
 ### Linting
