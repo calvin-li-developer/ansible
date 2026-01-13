@@ -1,18 +1,19 @@
 - name: Create .ssh directory
   ansible.builtin.file:
-    path: "/home/{{ ansible_user }}/.ssh"
+    path: '/home/{{ ansible_user }}/.ssh'
     state: directory
-    owner: "{{ ansible_user }}"
-    group: "{{ ansible_user }}"
-    mode: "0700"
+    owner: '{{ ansible_user }}'
+    group: '{{ ansible_user }}'
+    mode: '0700'
   tags:
     - ssh
     - users
 
-- name: "Set authorized keys from github for {{ ansible_user }}"
+
+- name: Set authorized keys from github for {{ ansible_user }}
   ansible.posix.authorized_key:
-    user: "{{ ansible_user }}"
-    key: "https://github.com/{{ ssh_github_user }}.keys"
+    user: '{{ ansible_user }}'
+    key: 'https://github.com/{{ ssh_github_user }}.keys'
     state: present
     exclusive: true
   tags:
