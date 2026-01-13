@@ -1,5 +1,5 @@
 # Global variables for all hosts in the `ubuntu` inventory group
 ansible_user: ubuntu
+docker_user: '{{ ansible_user }}'
+ssh_github_user: 'calvin-li-developer'
 timezone_location: America/Toronto
-ssh_github_user: "calvin-li-developer"
-docker_user: "{{ ansible_user }}"

@@ -1,5 +1,7 @@
 # command to use:
-# ansible-playbook playbooks/ubuntu.yml
+# uv run ansible-playbook playbooks/ubuntu.yml
+# dry run command:
+# uv run ansible-playbook playbooks/ubuntu.yml --check --diff
 
 - name: Initialize Ubuntu Servers
   hosts: ubuntu

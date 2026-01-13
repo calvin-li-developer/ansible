@@ -10,10 +10,10 @@
 - name: Ensure .nanorc contains syntax highlighting
   ansible.builtin.template:
     src: .nanorc.j2
-    dest: "/home/{{ ansible_user }}/.nanorc"
-    owner: "{{ ansible_user }}"
-    group: "{{ ansible_user }}"
-    mode: "0644"
+    dest: '/home/{{ ansible_user }}/.nanorc'
+    owner: '{{ ansible_user }}'
+    group: '{{ ansible_user }}'
+    mode: '0644'
   tags:
     - nano
     - config

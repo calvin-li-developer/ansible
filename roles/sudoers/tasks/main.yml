@@ -5,8 +5,8 @@
     line: '{{ ansible_user }} ALL=(ALL:ALL) NOPASSWD:ALL'
     state: present
     backup: false
-    validate: "visudo -cf %s"
-    mode: "0600"
+    validate: 'visudo -cf %s'
+    mode: '0600'
   tags:
     - sudoers
     - security
