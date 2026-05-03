@@ -3,7 +3,7 @@ version: 2
 enable-beta-ecosystems: true
 updates:
   - package-ecosystem: "github-actions"
-    directory: "/"  # Root directory of workflow files
+    directory: "/"
     schedule:
       interval: "cron"
       cronjob: 0 2 * * *
@@ -16,7 +16,18 @@ updates:
   - package-ecosystem: "uv"
     target-branch: "main"
     directory: "/"
-    # Check for updates once a week
+    schedule:
+      interval: "cron"
+      cronjob: 0 2 * * *
+      timezone: "America/New_York"
+    commit-message:
+      prefix: "chore(deps)"
+    cooldown:
+      default-days: 2
+
+  - package-ecosystem: "pip"
+    target-branch: "main"
+    directory: "/"
     schedule:
       interval: "cron"
       cronjob: 0 2 * * *
