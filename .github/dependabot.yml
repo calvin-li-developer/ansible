@@ -11,7 +11,7 @@ updates:
     commit-message:
       prefix: "chore(deps)"
     cooldown:
-      default-days: 2
+      default-days: 7
   
   - package-ecosystem: "uv"
     target-branch: "main"
@@ -23,8 +23,8 @@ updates:
     commit-message:
       prefix: "chore(deps)"
     cooldown:
-      default-days: 2
-
+      default-days: 7
+      
   - package-ecosystem: "pip"
     target-branch: "main"
     directory: "/"
@@ -35,4 +35,4 @@ updates:
     commit-message:
       prefix: "chore(deps)"
     cooldown:
-      default-days: 2
+      default-days: 7
