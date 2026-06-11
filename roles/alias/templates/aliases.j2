@@ -18,4 +18,4 @@ git() {
   fi
 }
 
-alias pkgupdate="sudo apt update && sudo apt upgrade -y && echo '' && echo 'Running Watchtower Container Update ...' && docker start watchtower &>/dev/null && docker exec -it watchtower /watchtower --run-once --cleanup 2>/dev/null && docker start watchtower &>/dev/null"
+alias pkgupdate="sudo apt update && sudo apt upgrade -y && sudo apt autoremove -y && echo '' && echo 'Running Watchtower Container Update ...' && docker start watchtower &>/dev/null && docker exec -it watchtower /watchtower --run-once --cleanup 2>/dev/null && docker start watchtower &>/dev/null"
