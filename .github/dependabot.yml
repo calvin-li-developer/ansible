@@ -21,7 +21,7 @@ updates:
       cronjob: 0 2 * * *
       timezone: "America/New_York"
     commit-message:
-      prefix: "chore(deps)"
+      prefix: "chore(uv.lock)"
     cooldown:
       default-days: 7
       
