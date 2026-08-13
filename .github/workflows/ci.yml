@@ -19,10 +19,7 @@ on:
   schedule:
     - cron: '30 6 * * *'
 
-permissions:
-  pull-requests: write
-  contents: write
-  security-events: write
+permissions: {}
 
 jobs:
   lint:
@@ -77,6 +74,8 @@ jobs:
     needs: [lint, trivy-scan]
     name: Merge PR
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
     concurrency:
       group: ${{ github.workflow }}-${{ github.ref }}
       cancel-in-progress: true
